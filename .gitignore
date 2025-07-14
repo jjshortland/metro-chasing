@@ -1,0 +1,7 @@
+.env
+activity_id_list.json
+id_checked_list.json
+id_list_with_latlng.json
+individual_activity_id_checked_list.json
+stations_visited_df.csv
+*.csv

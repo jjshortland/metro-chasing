@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9e3cd2a7-0304-4632-acd2-1f9d4985d93b" name="Changes" comment="Created Main.py file to run entire program in one go">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2ixRxVVQat63oZGFGPRgcRayVhb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Comparing_Coordinates.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Comparison Test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.GPS Points.executor&quot;: &quot;Run&quot;,
+    &quot;Python.GPS_Points.executor&quot;: &quot;Run&quot;,
+    &quot;Python.GPX Parsing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Route_Storage_List.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Station_Latitude_Data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Station_List.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Station_Location_Dictionary.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Station_Locations.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Station_Locations_pd.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Stations_Visited_DataFrame.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Stations_Visited_pd.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Statistics.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Strava_API.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Strava_Get_Activities_id.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Strava_Get_Activity_IDs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Strava_Get_LatLng.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.Strava_LatLng_Import.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Timer_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.gpxpy parsing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.gpxpy.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/GPS_points_csv" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Station Dictionary" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-babbdf50b680-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.15989.155" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9e3cd2a7-0304-4632-acd2-1f9d4985d93b" name="Changes" comment="" />
+      <created>1720430488626</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1720430488626</updated>
+    </task>
+    <task id="LOCAL-00001" summary="New &quot;Walking the Lines&quot; Project -- Setting the basis for comparing two sets of coordinates">
+      <option name="closed" value="true" />
+      <created>1720482896262</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1720482896262</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Changed coordinates to 4 significant figures to give an accuracy of ~10m">
+      <option name="closed" value="true" />
+      <created>1720483897682</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1720483897682</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed coordinates back to keep all data; split tube location dictionary into seperate dictionaries for longitude and latitude for ease of comparison">
+      <option name="closed" value="true" />
+      <created>1720515642696</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720515642696</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Installed Pandas for better data management, worked on comparisons between coordinate sets">
+      <option name="closed" value="true" />
+      <created>1720829709136</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720829709136</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Finished comparison function: by importing a GPX file, the code will return a list of every tube stop that was within 250m of the path.">
+      <option name="closed" value="true" />
+      <created>1720876078707</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720876078707</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added route storage list to enable more efficient route manage">
+      <option name="closed" value="true" />
+      <created>1721041125366</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721041125366</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changed main to Stations_Visited_DataFrame.py; removed the list, and created a DF that contains all visted stations">
+      <option name="closed" value="true" />
+      <created>1721042717239</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721042717239</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added statistics.py to show completion stats of London Zones">
+      <option name="closed" value="true" />
+      <created>1721044481784</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721044481784</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added lines to DF, added lines and zones inquiry in statistics">
+      <option name="closed" value="true" />
+      <created>1721046784980</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1721046784980</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added Strava API to get data for activities">
+      <option name="closed" value="true" />
+      <created>1721220168741</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1721220168741</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added JSON and CSV file management system">
+      <option name="closed" value="true" />
+      <created>1721946749208</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1721946749209</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Changed Stations_Visited_pd.py to not include duplicate stations, added check within for loop">
+      <option name="closed" value="true" />
+      <created>1721986647357</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1721986647357</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Changed Statistics.py to include information on network completeness.">
+      <option name="closed" value="true" />
+      <created>1721987777070</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1721987777070</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Changed Statistics.py to include information on network completeness.">
+      <option name="closed" value="true" />
+      <created>1721987815685</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1721987815685</updated>
+    </task>
+    <task id="LOCAL-00015" summary="QOL changes for Statistics.py">
+      <option name="closed" value="true" />
+      <created>1721988148915</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1721988148915</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Created Main.py file to run entire program in one go">
+      <option name="closed" value="true" />
+      <created>1721993690343</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1721993690343</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.csv" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="New &quot;Walking the Lines&quot; Project -- Setting the basis for comparing two sets of coordinates" />
+    <MESSAGE value="Changed coordinates to 4 significant figures to give an accuracy of ~10m" />
+    <MESSAGE value="Changed coordinates back to keep all data; split tube location dictionary into seperate dictionaries for longitude and latitude for ease of comparison" />
+    <MESSAGE value="Installed Pandas for better data management, worked on comparisons between coordinate sets" />
+    <MESSAGE value="Finished comparison function: by importing a GPX file, the code will return a list of every tube stop that was within 250m of the path." />
+    <MESSAGE value="Added route storage list to enable more efficient route manage" />
+    <MESSAGE value="Changed main to Stations_Visited_DataFrame.py; removed the list, and created a DF that contains all visted stations" />
+    <MESSAGE value="Added statistics.py to show completion stats of London Zones" />
+    <MESSAGE value="Added lines to DF, added lines and zones inquiry in statistics" />
+    <MESSAGE value="Added Strava API to get data for activities" />
+    <MESSAGE value="Added JSON and CSV file management system" />
+    <MESSAGE value="Changed Stations_Visited_pd.py to not include duplicate stations, added check within for loop" />
+    <MESSAGE value="Changed Statistics.py to include information on network completeness." />
+    <MESSAGE value="QOL changes for Statistics.py" />
+    <MESSAGE value="Created Main.py file to run entire program in one go" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Main.py file to run entire program in one go" />
+  </component>
+</project>
