@@ -2,8 +2,8 @@
 from Strava_Get_Activity_IDs import get_activity_ids
 from Strava_Get_LatLng import get_latlng
 from Stations_Visited_pd import stations_visited
-from Statistics import statistics
 from Stations_Visited_by_Activity import stations_visited_per_activity
+from Statistics import statistics
 
 get_activity_ids()
 get_latlng()
