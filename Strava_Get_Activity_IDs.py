@@ -4,8 +4,8 @@ import json
 import os
 from dotenv import load_dotenv
 
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def get_activity_ids():
     activity_id_list = []

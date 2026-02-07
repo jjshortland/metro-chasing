@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, BigInteger, Float, String, DateTime, ForeignKey
-from sqlalchemy.orm import declarative_base, sessionmaker, relationship
+from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine("sqlite:///metro_chasing.db")
 Base = declarative_base()
@@ -12,6 +13,7 @@ class ProcessedActivity(Base):
 
     id = Column(Integer, primary_key=True)
     strava_id = Column(BigInteger, unique=True, nullable=False)
+    activity_name = Column(String)
     date = Column(DateTime)
     processed_at = Column(DateTime)
     activity_type = Column(String)

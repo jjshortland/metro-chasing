@@ -7,16 +7,6 @@ import urllib3
 from dotenv import load_dotenv
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-'''
-What's needed: 
-- Expand latlng_df function to work with import limits, 100 requests every 15 minutes
-- keep list of id's that have already been run, to avoid calling old activities unnecessarily: probably easiest to keep
-a separate list that is appended within the loop (this could be linked with the first point, to ensure only the needed
-requests are made)
-- needs to be a check whether the activity contains GPS data. Some types of activity (indoor/treadmill runs, etc) will
-not contain GPS data which will break the program. Either do that here or in the Activity_ID get. I think here makes
-the most sense. Nesting an IF statement that checks the existence of "latlng" might be useful here.
-'''
 auth_token_url = "https://www.strava.com/oauth/token"
 activities_url = "https://www.strava.com/api/v3/athlete/activities"
 

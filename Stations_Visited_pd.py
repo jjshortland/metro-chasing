@@ -21,8 +21,8 @@ def stations_visited():
             gps_points_df = pd.read_csv(file_path)
 
         def compare_rows(row_to_check, tolerance=0.002):  #0.002=200m
-            latitude_difference = np.abs(gps_points_df["Latitude"] - row_to_check["Latitude"])
-            longitude_difference = np.abs(gps_points_df["Longitude"] - row_to_check["Longitude"])
+            latitude_difference = np.abs(gps_points_df["latitude"] - row_to_check["latitude"])
+            longitude_difference = np.abs(gps_points_df["longitude"] - row_to_check["longitude"])
             exists_within_tolerance = (latitude_difference <= tolerance) & (longitude_difference <= tolerance)
             if exists_within_tolerance.any():
                 return row_to_check
