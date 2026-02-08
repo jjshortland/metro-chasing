@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Metro Chaser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .stat-box {
+            background: #f0f0f0;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #0019a8;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #0019a8;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚇 Metro Chaser</h1>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/stations">Stations</a>
+        <a href="/lines">Lines</a>
+    </nav>
+
+    <div class="stat-box">
+        <div class="stat-number">{{ unique_stations }}</div>
+        <div>Of Total Stations Visited</div>
+    </div>
+
+    <div class="stat-box">
+        <div class="stat-number">{{ total_visits }}</div>
+        <div>Stations Visited</div>
+    </div>
+
+</body>
+</html>

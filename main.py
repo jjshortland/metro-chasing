@@ -6,6 +6,7 @@ import time
 import numpy as np
 from datetime import datetime
 
+
 # new single function that processes activities with GPS data on load in
 def process_new_activities():
     # activate session for SQl database
@@ -44,13 +45,13 @@ def process_new_activities():
 
     while True:
         param = {"page": page, "per_page": 200}
-        activites = requests.get(activities_url, headers=header, params=param).json()
+        activities = requests.get(activities_url, headers=header, params=param).json()
         # if there's no activities, break
-        if len(activites) == 0:
+        if len(activities) == 0:
             break
 
         # check if the new activities are in the SQL DB, if not they're new activities and are kept.
-        new_activities = [a for a in activites if a["id"] not in processed_ids]
+        new_activities = [a for a in activities if a["id"] not in processed_ids]
         all_activities.extend(new_activities)
         page += 1
 
@@ -74,7 +75,7 @@ def process_new_activities():
 
     for activity in all_activities:
         activity_id = activity['id']
-        activity_date = activity['start_date']
+        activity_date = datetime.fromisoformat(activity["start_date"].replace('Z', '+00:00'))
         activity_name = activity['name']
         activity_type = activity['sport_type']
 
@@ -86,7 +87,7 @@ def process_new_activities():
         # prepare activity record for given activity
         activity_record = ProcessedActivity(
             strava_id=activity_id,
-            date=datetime.fromisoformat(activity["start_date"].replace('Z', '+00:00')),
+            date=activity_date,
             processed_at=datetime.now(),
             activity_name=activity_name,
             activity_type=activity_type
@@ -144,4 +145,3 @@ def process_new_activities():
     print(f"Unique stations: {unique_stations}")
 
     session.close()
-

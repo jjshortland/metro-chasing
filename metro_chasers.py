@@ -5,6 +5,8 @@ from Stations_Visited_pd import stations_visited
 from Stations_Visited_by_Activity import stations_visited_per_activity
 from Statistics import statistics
 from main import process_new_activities
+from model import SessionLocal, ProcessedActivity, StationInfo, StationVisit
+
 
 # get_activity_ids()
 # get_latlng()
@@ -17,3 +19,9 @@ from main import process_new_activities
 #     print("Have a lovely day.")
 
 process_new_activities()
+session = SessionLocal()
+total_visits = session.query(StationVisit).count()
+unique_stations = session.query(StationVisit.station_id).distinct().count()
+
+# print(f'Total station visits: {total_visits}.')
+# print(f'Unique stations visited: {unique_stations}.')

@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
 def get_activity_ids():
     activity_id_list = []
     all_activities = []

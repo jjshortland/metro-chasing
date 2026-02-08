@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stations Visited - Metro Chaser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #0019a8;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #0019a8;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚇 Stations Visited</h1>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/stations">Stations</a>
+        <a href="/lines">Lines</a>
+    </nav>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Station</th>
+                <th>Zone</th>
+                <th>Lines</th>
+                <th>Visits</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for station in stations %}
+            <tr>
+                <td>{{ station.name }}</td>
+                <td>{{ station.zone }}</td>
+                <td>{{ station.lines }}</td>
+                <td>{{ station.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
