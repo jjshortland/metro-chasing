@@ -1,8 +1,53 @@
 # app.py
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from model import SessionLocal, StationVisit, StationInfo, ProcessedActivity
 
 app = Flask(__name__)
+
+
+def get_all_stations_geojson():
+    """Get all stations with visited status"""
+    session = SessionLocal()
+
+    try:
+        # Get all stations
+        all_stations = session.query(StationInfo).all()
+
+        # Get set of visited station IDs
+        visited_station_ids = set(
+            visit.station_id for visit in session.query(StationVisit).all()
+        )
+
+        features = []
+        for station in all_stations:
+            feature = {
+                'type': 'Feature',
+                'properties': {
+                    'name': station.name,
+                    'line': station.line,
+                    'visited': station.id in visited_station_ids,  # ✅ Track visited status
+                    'zone': station.zone if hasattr(station, 'zone') else None
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [station.longitude, station.latitude]
+                }
+            }
+            features.append(feature)
+
+        return {
+            'type': 'FeatureCollection',
+            'features': features
+        }
+
+    finally:
+        session.close()
+
+@app.route('/api/all-stations')
+def get_all_stations():
+    """Get all stations with visited status"""
+    geojson = get_all_stations_geojson()
+    return jsonify(geojson)
 
 @app.route('/')
 def home():
@@ -59,13 +104,10 @@ def lines():
     visited_stations_by_line = {}
     for visit in visits:
         lines = visit.station.line.split(',')
-
         for line in lines:
             line = line.strip()
-
             if line not in visited_stations_by_line:
                 visited_stations_by_line[line] = set()
-
             visited_stations_by_line[line].add(visit.station.name)
 
     # Track ALL stations per line
@@ -109,6 +151,63 @@ def lines():
     session.close()
 
     return render_template('lines.html', lines=line_list)
+
+
+@app.route('/zones')
+def zones():
+    session = SessionLocal()
+
+    visits = session.query(StationVisit).all()
+    all_stations = session.query(StationInfo).all()
+
+    # Track visited stations per zone
+    visited_stations_by_zone = {}
+    for visit in visits:
+        zone = visit.station.zone  # Just get the zone directly
+
+        if zone not in visited_stations_by_zone:
+            visited_stations_by_zone[zone] = set()
+
+        visited_stations_by_zone[zone].add(visit.station.name)
+
+    # Track ALL stations per zone
+    total_stations_by_zone = {}
+    for station in all_stations:
+        zone = station.zone  # Just get the zone directly
+
+        if zone not in total_stations_by_zone:
+            total_stations_by_zone[zone] = set()
+
+        total_stations_by_zone[zone].add(station.name)
+
+    # Build the final list with percentages and missing stations
+    zone_list = []
+    for zone in total_stations_by_zone.keys():
+        total = len(total_stations_by_zone[zone])
+        visited_set = visited_stations_by_zone.get(zone, set())
+        visited = len(visited_set)
+
+        # Calculate percentage
+        percentage = (visited / total * 100) if total > 0 else 0
+
+        # Find missing stations (set difference)
+        missing_stations = total_stations_by_zone[zone] - visited_set
+
+        zone_list.append({
+            'zone': zone,
+            'visited': visited,
+            'total': total,
+            'percentage': round(percentage, 1),
+            'visited_stations': sorted(visited_set),
+            'missing_stations': sorted(missing_stations)
+        })
+
+    # Sort by zone number (Zone 1, Zone 2, etc.)
+    zone_list = sorted(zone_list, key=lambda x: x['zone'])
+
+    session.close()
+
+    return render_template('zones.html', zones=zone_list)  # Changed 'lines' to 'zones'!
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

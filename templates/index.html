@@ -2,52 +2,275 @@
 <html>
 <head>
     <title>Metro Chaser</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Mapbox CSS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 300px;
+            background: #0019a8;
+            color: white;
             padding: 20px;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        nav {
+            margin: 30px 0;
+        }
+        nav a {
+            display: block;
+            margin: 15px 0;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
         .stat-box {
-            background: #f0f0f0;
-            padding: 20px;
-            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 15px 0;
             border-radius: 5px;
         }
         .stat-number {
-            font-size: 48px;
+            font-size: 36px;
             font-weight: bold;
+            color: white;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 5px;
+        }
+        .main-content {
+            flex: 1;
+            position: relative;
+        }
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Popup styling */
+        .mapboxgl-popup-content {
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .popup-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
             color: #0019a8;
         }
-        nav {
-            margin: 20px 0;
-        }
-        nav a {
-            margin-right: 15px;
-            text-decoration: none;
-            color: #0019a8;
+        .popup-detail {
+            font-size: 14px;
+            color: #666;
+            margin: 3px 0;
         }
     </style>
 </head>
 <body>
-    <h1>🚇 Metro Chaser</h1>
+    <div class="sidebar">
+        <h1>🚇 Metro Chaser</h1>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="/stations">Stations</a>
-        <a href="/lines">Lines</a>
-    </nav>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/lines">Lines</a>
+            <a href="/zones">Zones</a>
+            <a href="/stations">Stations</a>
+        </nav>
 
-    <div class="stat-box">
-        <div class="stat-number">{{ unique_stations }}</div>
-        <div>Of Total Stations Visited</div>
+        <div class="stat-box">
+            <div class="stat-number">{{ unique_stations }}</div>
+            <div class="stat-label">Of Total Stations Visited</div>
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-number">{{ total_visits }}</div>
+            <div class="stat-label">Unique Stations</div>
+        </div>
     </div>
 
-    <div class="stat-box">
-        <div class="stat-number">{{ total_visits }}</div>
-        <div>Stations Visited</div>
+    <div class="main-content">
+        <div id='map'></div>
     </div>
 
+    <!-- Mapbox JS -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js'></script>
+
+    <script>
+        // Replace with your actual Mapbox public token
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiai1zaG9ydGxhbmQiLCJhIjoiY21sZ21qa3R1MDBmejNnczFuanZrbmtyZSJ9.bDdgnLuOlEEB73EPepP_AQ';
+
+        // Create map centered on London with light style
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12', // Light theme
+            center: [-0.1276, 51.5074], // London coordinates
+            zoom: 11
+        });
+
+        // Load stations when map is ready
+        map.on('load', async () => {
+            try {
+                // Fetch ALL stations (both visited and unvisited)
+                const response = await fetch('/api/all-stations');
+                const allStationsData = await response.json();
+
+                // Add the data source
+                map.addSource('all-stations', {
+                    type: 'geojson',
+                    data: allStationsData
+                });
+
+                // ========== UNVISITED STATIONS (RED) ==========
+
+                // Red glow for unvisited
+                map.addLayer({
+                    id: 'unvisited-glow',
+                    type: 'circle',
+                    source: 'all-stations',
+                    filter: ['!', ['get', 'visited']], // Only unvisited stations
+                    paint: {
+                        'circle-radius': 12,
+                        'circle-color': '#ff0000',
+                        'circle-opacity': 0.2,
+                        'circle-blur': 0.8
+                    }
+                });
+
+                // Red markers for unvisited
+                map.addLayer({
+                    id: 'unvisited-points',
+                    type: 'circle',
+                    source: 'all-stations',
+                    filter: ['!', ['get', 'visited']], // Only unvisited stations
+                    paint: {
+                        'circle-radius': 6,
+                        'circle-color': '#ff0000',
+                        'circle-stroke-width': 2,
+                        'circle-stroke-color': '#ffffff',
+                        'circle-opacity': 0.7
+                    }
+                });
+
+                // ========== VISITED STATIONS (GREEN) ==========
+
+                // Green glow for visited
+                map.addLayer({
+                    id: 'visited-glow',
+                    type: 'circle',
+                    source: 'all-stations',
+                    filter: ['get', 'visited'], // Only visited stations
+                    paint: {
+                        'circle-radius': 16,
+                        'circle-color': '#00d924',
+                        'circle-opacity': 0.3,
+                        'circle-blur': 0.8
+                    }
+                });
+
+                // Green markers for visited
+                map.addLayer({
+                    id: 'visited-points',
+                    type: 'circle',
+                    source: 'all-stations',
+                    filter: ['get', 'visited'], // Only visited stations
+                    paint: {
+                        'circle-radius': 10,
+                        'circle-color': '#00d924',
+                        'circle-stroke-width': 3,
+                        'circle-stroke-color': '#ffffff'
+                    }
+                });
+
+                // ========== LABELS (only for visited) ==========
+
+                map.addLayer({
+                    id: 'station-labels',
+                    type: 'symbol',
+                    source: 'all-stations',
+                    filter: ['get', 'visited'], // Only show labels for visited
+                    layout: {
+                        'text-field': ['get', 'name'],
+                        'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                        'text-size': 11,
+                        'text-offset': [0, 1.8],
+                        'text-anchor': 'top'
+                    },
+                    paint: {
+                        'text-color': '#000',
+                        'text-halo-color': '#fff',
+                        'text-halo-width': 2
+                    }
+                });
+
+                // ========== POPUPS ==========
+
+                // Popup for visited stations
+                map.on('click', 'visited-points', (e) => {
+                    const coordinates = e.features[0].geometry.coordinates.slice();
+                    const props = e.features[0].properties;
+
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(`
+                            <div class="popup-title">${props.name}</div>
+                            <div class="popup-detail">${props.line} Line</div>
+                            <div class="popup-detail">✓ Visited</div>
+                        `)
+                        .addTo(map);
+                });
+
+                // Popup for unvisited stations
+                map.on('click', 'unvisited-points', (e) => {
+                    const coordinates = e.features[0].geometry.coordinates.slice();
+                    const props = e.features[0].properties;
+
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(`
+                            <div class="popup-title">${props.name}</div>
+                            <div class="popup-detail">${props.line} Line</div>
+                            <div class="popup-detail" style="color: #999;">Not yet visited</div>
+                        `)
+                        .addTo(map);
+                });
+
+                // Cursor changes
+                map.on('mouseenter', 'visited-points', () => {
+                    map.getCanvas().style.cursor = 'pointer';
+                });
+                map.on('mouseleave', 'visited-points', () => {
+                    map.getCanvas().style.cursor = '';
+                });
+                map.on('mouseenter', 'unvisited-points', () => {
+                    map.getCanvas().style.cursor = 'pointer';
+                });
+                map.on('mouseleave', 'unvisited-points', () => {
+                    map.getCanvas().style.cursor = '';
+                });
+
+            } catch (error) {
+                console.error('Error loading stations:', error);
+            }
+        });
+    </script>
 </body>
 </html>

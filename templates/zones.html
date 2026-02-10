@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lines Progress - Metro Chaser</title>
+    <title>Zones Progress - Metro Chaser</title>
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             max-width: 1000px;
             margin: 50px auto;
             padding: 20px;
@@ -85,7 +85,7 @@
     </style>
 </head>
 <body>
-    <h1>🚇 Line Progress</h1>
+    <h1>🚇 Zone Progress</h1>
 
     <nav>
         <a href="/">Home</a>
@@ -97,28 +97,28 @@
     <table>
         <thead>
             <tr>
-                <th>Line</th>
+                <th>Zones</th>
                 <th>Progress</th>
                 <th>Percentage</th>
                 <th>Missing Stations</th>
             </tr>
         </thead>
         <tbody>
-            {% for line in lines %}
+            {% for zone in zones %}
             <tr>
-                <td><strong>{{ line.line }}</strong></td>
+                <td><strong>{{ zone.zone }}</strong></td>
                 <td>
-                    {{ line.visited }} / {{ line.total }}
+                    {{ zone.visited }} / {{ zone.total }}
                     <div class="progress-container">
-                        <div class="progress-bar" style="width: {{ line.percentage }}%"></div>
+                        <div class="progress-bar" style="width: {{ zone.percentage }}%"></div>
                     </div>
                 </td>
-                <td class="percentage">{{ line.percentage }}%</td>
+                <td class="percentage">{{ zone.percentage }}%</td>
                 <td>
                     <details>
-                        <summary>{{ line.total - line.visited }} stations to go</summary>
+                        <summary>{{ zone.total - zone.visited }} stations to go</summary>
                         <ul>
-                            {% for station in line.missing_stations %}
+                            {% for station in zone.missing_stations %}
                             <li>{{ station }}</li>
                             {% endfor %}
                         </ul>
